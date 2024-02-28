@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intern_tasks/models/food_item_model.dart';
+import 'package:intern_tasks/constants/constants.dart';
 
 class Restaurant extends StatefulWidget {
   const Restaurant({super.key});
@@ -40,7 +42,7 @@ class _RestaurantState extends State<Restaurant> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.deepOrangeAccent[700],
+        backgroundColor: AppConstants.PRIMARY_COLOR,
         onPressed: () {
           // TODO
           // view full menu
@@ -51,7 +53,7 @@ class _RestaurantState extends State<Restaurant> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Pizza Town', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.deepOrangeAccent[700],
+        backgroundColor: AppConstants.PRIMARY_COLOR,
       ),
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
@@ -134,7 +136,7 @@ class _RestaurantState extends State<Restaurant> {
                           BorderRadius.circular(5.0), // Adjust the border radius value as needed
                     ),
                   ),
-                  child: Text("ADD", style: TextStyle(color: Colors.deepOrangeAccent[700])),
+                  child: Text("ADD", style: TextStyle(color: AppConstants.PRIMARY_COLOR)),
                 ),
               ],
             ),
@@ -143,21 +145,4 @@ class _RestaurantState extends State<Restaurant> {
       ),
     );
   }
-}
-
-class FoodItem {
-  int cost;
-  String name;
-  String description;
-  String imageUrl;
-  bool isSpecial;
-  bool isVeg;
-
-  FoodItem(
-      {required this.cost,
-      required this.name,
-      required this.description,
-      required this.imageUrl,
-      required this.isVeg,
-      required this.isSpecial});
 }
