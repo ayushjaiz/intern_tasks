@@ -13,10 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Restaurant',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      home: const Restaurant(),
+      theme: ThemeData(useMaterial3: true),
+      home: Restaurant(),
     );
   }
 }
