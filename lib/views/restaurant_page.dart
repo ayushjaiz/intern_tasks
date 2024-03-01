@@ -1,50 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:intern_tasks/models/food_item_model.dart';
+import 'package:intern_tasks/data/dummy_data.dart' as dummy_data;
 import 'package:intern_tasks/constants/constants.dart';
+import 'package:intern_tasks/models/food_item_model.dart';
 
-class Restaurant extends StatefulWidget {
-  const Restaurant({super.key});
+class Restaurant extends StatelessWidget {
+  final List<FoodItem> foodItems = dummy_data.foodItems;
 
-  @override
-  State<Restaurant> createState() => _RestaurantState();
-}
-
-class _RestaurantState extends State<Restaurant> {
-  List<FoodItem> foodItems = [
-    FoodItem(
-        cost: 169,
-        name: "Farmhouse Pizza",
-        description: "Onion, Mushroom, Capsicum & Tomato",
-        imageUrl:
-            "https://lh3.googleusercontent.com/bbwf5LAF728glL7Bkeyx0S19pZaqvu_yC6AJS8MsFOK7lE_15TZbXYk7lyujI08jHNvE2ZFPk4tTsAqEWfpXCytHBSAVRHob-my1ng8=w512-rw",
-        isVeg: true,
-        isSpecial: true),
-    FoodItem(
-        cost: 180,
-        name: "Paneer Tikka Pizza",
-        description: "Savory fusion: Panner Tikka Pizza blends Indian flavors with cheesy delight",
-        imageUrl: "https://cdn.dotpe.in/longtail/store-items/8050593/mOpZvDFu.jpeg",
-        isVeg: true,
-        isSpecial: false),
-    FoodItem(
-        cost: 169,
-        name: "Tandoori Chicken BBQ Pizza",
-        description:
-            "A blend of smoky tandoori chicken and tangy BBQ sauce on a crispy pizza crust",
-        imageUrl:
-            "https://images.slurrp.com/prod/articles/ln83opwfdua.webp?impolicy=slurrp-20210601",
-        isVeg: false,
-        isSpecial: false),
-    FoodItem(
-        cost: 210,
-        name: "Tandoori Chicken BBQ Pizza",
-        description:
-            "A blend of smoky tandoori chicken and tangy BBQ sauce on a crispy pizza crust",
-        imageUrl:
-            "https://images.slurrp.com/prod/articles/ln83opwfdua.webp?impolicy=slurrp-20210601",
-        isVeg: false,
-        isSpecial: false),
-  ];
+  Restaurant({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,33 +24,25 @@ class _RestaurantState extends State<Restaurant> {
         title: const Text('Pizza Town', style: TextStyle(color: Colors.white)),
         backgroundColor: AppConstants.PRIMARY_COLOR,
       ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                color: Colors.orangeAccent[100],
-                child: const Center(
-                    child: Text("Pizza", style: TextStyle(fontWeight: FontWeight.bold))),
-              ),
-              const SizedBox(height: 40),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: foodItems.length,
-                  itemBuilder: (context, index) {
-                    return _itemList(foodItems[index]);
-                  },
-                ),
-              )
-            ],
+      body: ListView(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            color: Colors.orangeAccent[100],
+            child:
+                const Center(child: Text("Pizza", style: TextStyle(fontWeight: FontWeight.bold))),
           ),
-        ),
+          Container(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            margin: const EdgeInsets.only(top: 40),
+            child: ListView.builder(
+              itemCount: foodItems.length,
+              itemBuilder: (context, index) {
+                return _itemList(foodItems[index]);
+              },
+            ),
+          )
+        ],
       ),
     );
   }
@@ -119,8 +73,8 @@ class _RestaurantState extends State<Restaurant> {
               ],
             ),
           ),
-          const SizedBox(width: 10),
-          SizedBox(
+          Container(
+            margin: const EdgeInsets.only(left: 10),
             width: 75,
             height: 120,
             child: Column(
@@ -128,15 +82,10 @@ class _RestaurantState extends State<Restaurant> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(
-                    foodItem.imageUrl,
-                    width: 75,
-                    height: 75,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.network(foodItem.imageUrl, width: 75, height: 75, fit: BoxFit.cover),
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width,
+                  width: 75,
                   child: OutlinedButton(
                     onPressed: () {
                       // TODO
